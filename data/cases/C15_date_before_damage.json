@@ -1,0 +1,56 @@
+{
+  "case_id": "C15_date_before_damage",
+  "category": "date",
+  "what_it_tests": "Invoice dated a week before the storm happened",
+  "claim": {
+    "claim_number": "PX-2026-104871",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Sturmschaden",
+    "damage_date": "2026-07-09",
+    "location": "Lindenstraße 17, 40789 Monheim am Rhein",
+    "description": "Sturmtief hat auf der Südseite des Satteldachs ca. 20 Dachziegel gelöst; die Dachrinne ist auf ca. 6 m Länge verbogen. Kein Wassereintritt ins Gebäude."
+  },
+  "document_text": "Dachdeckerei Hoffmann\nRheinuferweg 21, 40789 Monheim am Rhein\nUSt-IdNr. DE855678901\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104871\nLeistungsort: Lindenstraße 17, 40789 Monheim am Rhein\n\nRECHNUNG\nRechnungsnummer: DH-2026-097\nRechnungsdatum: 02.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | DAC-001 | Dachziegel ersetzen | 20 | Stk | 18,00 € | 360,00 €\n2 | DAC-002 | Arbeitsstunde Dachdecker | 3 | Std | 65,00 € | 195,00 €\n\nNettobetrag: 555,00 €\nzzgl. 19 % MwSt.: 105,45 €\nRechnungsbetrag (brutto): 660,45 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE64 3005 0110 0045 6789 01",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Dachdecker",
+    "document": {
+      "number": "DH-2026-097",
+      "date": "2026-07-02",
+      "contractor": "Dachdeckerei Hoffmann",
+      "claim_number": "PX-2026-104871",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "DAC-001",
+          "description": "Dachziegel ersetzen",
+          "quantity": "20",
+          "unit": "Stk",
+          "unit_price": "18.00",
+          "line_total": "360.00"
+        },
+        {
+          "position": "2",
+          "code": "DAC-002",
+          "description": "Arbeitsstunde Dachdecker",
+          "quantity": "3",
+          "unit": "Std",
+          "unit_price": "65.00",
+          "line_total": "195.00"
+        }
+      ],
+      "net_total": "555.00",
+      "vat_rate": "19",
+      "vat_amount": "105.45",
+      "gross_total": "660.45"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "DATE_BEFORE_DAMAGE"
+    ]
+  }
+}

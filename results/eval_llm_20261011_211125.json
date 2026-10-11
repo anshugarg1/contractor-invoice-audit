@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "mode": "llm",
+    "model": "groq:openai/gpt-oss-120b",
+    "cases": 2,
+    "repeats": 1,
+    "prompt_version": "2026-09-13.1",
+    "graph_version": "1.0",
+    "run_at": "2026-10-11T21:11:25"
+  },
+  "summary": {
+    "Correct route": "1/2 (50%)",
+    "False approvals (bad invoice auto-approved)": "n/a",
+    "Dark-processing rate (clean invoice auto-approved)": "1/2 (50%)",
+    "Expected findings detected": "n/a",
+    "Extraction: fields exactly right": "56/56 (100%)",
+    "Extraction: documents fully right": "2/2 (100%)",
+    "Same route in all 1 runs": "n/a (1 run)",
+    "Same findings in all 1 runs": "n/a (1 run)",
+    "Errors": "0",
+    "Latency per case (mean / max)": "4.0 s / 4.6 s"
+  },
+  "cases": [
+    {
+      "case_id": "C01_clean_plumbing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED"
+          ],
+          "latency_s": 4.64,
+          "findings": [
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: Only 2 m² of wall opening is billed while the claim states about 18 m² of wall was affected, making the scope appear smaller than expected.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are needed to reach the kitchen at Musterweg 5 for the repair work described in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Leak detection with a measuring device is required to locate the undichte Warmwasser‑Kupferleitung behind the kitchen wall."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "Only 2 m² of wall opening is billed while the claim states about 18 m² of wall was affected, making the scope appear smaller than expected."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Replacing 3 m of 15 mm copper pipe matches a typical segment length needed to fix the leak behind the kitchen wall."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Four 15 mm press‑fittings are consistent with joining and terminating a 3 m pipe replacement."
+            },
+            {
+              "position": "6",
+              "verdict": "plausible",
+              "reason": "Three hours of installer labor aligns with the described tasks of detection, pipe replacement and wall repair."
+            }
+          ],
+          "extraction": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C02_clean_drying",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 3.39,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Three drying devices are needed to dry the 18 m² wall and 22 m² laminate floor described in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Renting three condensers for 14 days matches the required drying period for the water‑affected kitchen area."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "The 380 kWh electricity usage corresponds to powering the drying equipment needed for the described damage."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Three moisture measurements are appropriate to monitor the drying progress of the affected wall and floor."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    }
+  ]
+}

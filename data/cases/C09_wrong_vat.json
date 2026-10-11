@@ -1,0 +1,56 @@
+{
+  "case_id": "C09_wrong_vat",
+  "category": "arithmetic",
+  "what_it_tests": "VAT amount does not equal 19 % of net",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Bodenwelt Krause GmbH\nAm Markt 8, 42697 Solingen\nUSt-IdNr. DE844567890\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: BK-4502\nRechnungsdatum: 03.08.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | BOD-001 | Laminat entfernen und entsorgen | 22 | m² | 9,00 € | 198,00 €\n2 | BOD-002 | Laminat verlegen inkl. Material | 22 | m² | 42,00 € | 924,00 €\n\nNettobetrag: 1.122,00 €\nzzgl. 19 % MwSt.: 313,18 €\nRechnungsbetrag (brutto): 1.435,18 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE31 3425 0000 0001 2345 67",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Bodenleger",
+    "document": {
+      "number": "BK-4502",
+      "date": "2026-08-03",
+      "contractor": "Bodenwelt Krause GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "BOD-001",
+          "description": "Laminat entfernen und entsorgen",
+          "quantity": "22",
+          "unit": "m²",
+          "unit_price": "9.00",
+          "line_total": "198.00"
+        },
+        {
+          "position": "2",
+          "code": "BOD-002",
+          "description": "Laminat verlegen inkl. Material",
+          "quantity": "22",
+          "unit": "m²",
+          "unit_price": "42.00",
+          "line_total": "924.00"
+        }
+      ],
+      "net_total": "1122.00",
+      "vat_rate": "19",
+      "vat_amount": "313.18",
+      "gross_total": "1435.18"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "ARITH_VAT"
+    ]
+  }
+}

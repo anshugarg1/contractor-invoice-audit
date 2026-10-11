@@ -1,0 +1,26 @@
+code,trade,description,unit,typical_price,max_price
+GEN-001,Allgemein,Anfahrt / Fahrtkosten,pauschal,45.00,65.00
+SAN-001,Sanitär,Leckageortung mit Messgerät,Std,95.00,120.00
+SAN-003,Sanitär,Arbeitsstunde Installateur,Std,68.00,85.00
+SAN-004,Sanitär,Kupferrohr 15 mm erneuern,m,38.00,50.00
+SAN-005,Sanitär,Pressfitting 15 mm,Stk,14.00,20.00
+SAN-006,Sanitär,Wand öffnen und verschließen,m²,55.00,75.00
+TRO-001,Trocknung,Trocknungsgerät aufstellen und abbauen,Stk,60.00,80.00
+TRO-002,Trocknung,Kondenstrockner Miete,Tag,12.00,16.00
+TRO-003,Trocknung,Stromkosten Trocknung,kWh,0.40,0.45
+TRO-004,Trocknung,Feuchtemessung,Stk,45.00,60.00
+MAL-001,Maler,Wand grundieren,m²,3.50,5.00
+MAL-002,Maler,"Wand streichen, Dispersion, 2x",m²,9.50,13.00
+MAL-003,Maler,Decke streichen,m²,11.00,15.00
+MAL-004,Maler,Tapete entfernen,m²,6.00,8.50
+MAL-005,Maler,Raufaser tapezieren,m²,12.00,16.00
+MAL-006,Maler,Fassade streichen,m²,16.00,22.00
+BOD-001,Bodenleger,Laminat entfernen und entsorgen,m²,9.00,12.00
+BOD-002,Bodenleger,Laminat verlegen inkl. Material,m²,42.00,55.00
+BOD-003,Bodenleger,Sockelleiste montieren,m,11.00,15.00
+DAC-001,Dachdecker,Dachziegel ersetzen,Stk,18.00,25.00
+DAC-002,Dachdecker,Arbeitsstunde Dachdecker,Std,65.00,80.00
+DAC-003,Dachdecker,Gerüst stellen,m²,12.00,16.00
+DAC-004,Dachdecker,Dachrinne erneuern,m,48.00,62.00
+ELE-001,Elektro,Steckdose erneuern,Stk,45.00,60.00
+ELE-002,Elektro,Arbeitsstunde Elektriker,Std,70.00,88.00

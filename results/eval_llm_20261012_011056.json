@@ -1,0 +1,385 @@
+{
+  "meta": {
+    "mode": "llm",
+    "model": "groq:openai/gpt-oss-120b",
+    "cases": 17,
+    "repeats": 1,
+    "prompt_version": "2026-09-13.1",
+    "graph_version": "1.0",
+    "run_at": "2026-10-12T01:10:54"
+  },
+  "summary": {
+    "Correct route": "2/17 (12%)",
+    "False approvals (bad invoice auto-approved)": "0/12 (0%)",
+    "Dark-processing rate (clean invoice auto-approved)": "2/5 (40%)",
+    "Expected findings detected": "0/14 (0%)",
+    "Extraction: fields exactly right": "56/56 (100%)",
+    "Extraction: documents fully right": "2/2 (100%)",
+    "Same route in all 1 runs": "n/a (1 run)",
+    "Same findings in all 1 runs": "n/a (1 run)",
+    "Errors": "15",
+    "Latency per case (mean / max)": "4.4 s / 4.4 s"
+  },
+  "cases": [
+    {
+      "case_id": "C01_clean_plumbing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 4.39,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are necessary for the contractor to reach the kitchen at Musterweg 5 where the leak occurred."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Leak detection with a measuring device is required to locate the undichte Warmwasser‑Kupferleitung behind the kitchen wall."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Opening and closing approximately 2 m² of wall is reasonable to access the pipe despite the total 18 m² of damaged wall area."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Replacing 3 m of 15 mm copper pipe matches the need to renew the faulty pipe that caused the water ingress."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Four 15 mm press fittings are consistent with connecting and securing the new 3 m pipe section."
+            },
+            {
+              "position": "6",
+              "verdict": "plausible",
+              "reason": "Three hours of installer labor aligns with the tasks of detection, wall work, pipe replacement, and finishing."
+            }
+          ],
+          "extraction": [
+            32,
+            32
+          ],
+          "trace_id": "118f5fbe262d2f71e1dac9399319622e"
+        }
+      ]
+    },
+    {
+      "case_id": "C02_clean_drying",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 4.42,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Drying devices are needed to remove moisture from the 18 m² wall and 22 m² laminate floor described in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Three condensers for 14 days match the prolonged drying period required for the affected kitchen area."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Electricity consumption corresponds to operating the drying equipment used for the water‑damaged kitchen."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Moisture measurements are necessary to verify that the 18 m² wall and 22 m² floor have been properly dried."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ],
+          "trace_id": "9497aa5119638209ad3fa07b41b01251"
+        }
+      ]
+    },
+    {
+      "case_id": "C03_clean_painting",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1503. Please try again in 8m10.32s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "7f3421d01165da93c9fdb975a5e95fca"
+        }
+      ]
+    },
+    {
+      "case_id": "C04_clean_flooring_with_quote",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1478. Please try again in 7m59.52s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "607dd804a934ea6a68f7fbc60b47dc62"
+        }
+      ]
+    },
+    {
+      "case_id": "C05_clean_roofing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1535. Please try again in 8m24.144s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "ac9292fa3cef76abd736164c8f069326"
+        }
+      ]
+    },
+    {
+      "case_id": "C06_overpriced_labour",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1478. Please try again in 7m59.52s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "4606ca02556bb6839dfa6e06ff48db09"
+        }
+      ]
+    },
+    {
+      "case_id": "C07_overpriced_drying",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1052. Please try again in 4m55.488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "02e28bface8d36a39c513e04214e9be7"
+        }
+      ]
+    },
+    {
+      "case_id": "C08_wrong_line_total",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_LINE_TOTAL"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 714. Please try again in 2m29.472s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "fdfaa326595766741fed912a27d5f8f1"
+        }
+      ]
+    },
+    {
+      "case_id": "C09_wrong_vat",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_VAT"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1449. Please try again in 7m46.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "eb1e95c6bfa100c830b351aedb7f8945"
+        }
+      ]
+    },
+    {
+      "case_id": "C10_duplicate_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DUPLICATE_INVOICE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1539. Please try again in 8m25.872s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "19286489cd58e7ce67c43550a5bdd4e0"
+        }
+      ]
+    },
+    {
+      "case_id": "C11_implausible_facade",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 721. Please try again in 2m32.496s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "1f325e20ecc4997faf1a03fa80b4df0a"
+        }
+      ]
+    },
+    {
+      "case_id": "C12_implausible_quantity",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 756. Please try again in 2m47.616s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "7205824c96bba0b51f80e25026312fef"
+        }
+      ]
+    },
+    {
+      "case_id": "C13_prompt_injection",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PROMPT_INJECTION_SUSPECTED",
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1521. Please try again in 8m18.096s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "09a0d9ae0aeecbdd4985728ec328b62b"
+        }
+      ]
+    },
+    {
+      "case_id": "C14_exceeds_quote",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "EXCEEDS_QUOTE",
+          "QTY_ABOVE_QUOTE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1480. Please try again in 8m0.383999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "c2f7d136a4aaea9a3d7e70eded59c2bf"
+        }
+      ]
+    },
+    {
+      "case_id": "C15_date_before_damage",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DATE_BEFORE_DAMAGE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199632, Requested 1446. Please try again in 7m45.696s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "bf56fd4f7d3bb6aabe350d67de6b18e0"
+        }
+      ]
+    },
+    {
+      "case_id": "C16_unknown_item",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "UNKNOWN_ITEM"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199631, Requested 1047. Please try again in 4m52.895999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "4b10559ef5d9348d3fc2e0d6930d3239"
+        }
+      ]
+    },
+    {
+      "case_id": "C17_quote_not_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "WRONG_DOC_TYPE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "error",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kqtgywkfevsbmn24yptd8v1j` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199631, Requested 1462. Please try again in 7m52.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "codes": [],
+          "latency_s": 0.0,
+          "trace_id": "577c441efa783e00e1a3ebe1bfd2ca08"
+        }
+      ]
+    }
+  ]
+}

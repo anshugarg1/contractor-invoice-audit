@@ -1,0 +1,798 @@
+{
+  "meta": {
+    "mode": "baseline",
+    "model": "baseline: ground-truth extraction + rules only (no LLM judgment)",
+    "cases": 17,
+    "repeats": 1,
+    "prompt_version": "2026-09-13.1",
+    "graph_version": "1.0",
+    "run_at": "2026-09-13T15:18:04"
+  },
+  "summary": {
+    "Correct route": "15/17 (88%)",
+    "False approvals (bad invoice auto-approved)": "2/12 (17%)",
+    "Dark-processing rate (clean invoice auto-approved)": "5/5 (100%)",
+    "Expected findings detected": "12/14 (86%)",
+    "Extraction: fields exactly right": "340/340 (100%)",
+    "Extraction: documents fully right": "16/16 (100%)",
+    "Same route in all 1 runs": "n/a (1 run)",
+    "Same findings in all 1 runs": "n/a (1 run)",
+    "Errors": "0",
+    "Latency per case (mean / max)": "0.0 s / 0.0 s"
+  },
+  "cases": [
+    {
+      "case_id": "C01_clean_plumbing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.01,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "6",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C02_clean_drying",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C03_clean_painting",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C04_clean_flooring_with_quote",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C05_clean_roofing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            28,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C06_overpriced_labour",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "PRICE_ABOVE_MAX"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 118.00 €/Std is above the maximum 85.00 (+74 % vs typical 68.00)",
+              "source": "tool",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C07_overpriced_drying",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "PRICE_ABOVE_MAX"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 22.00 €/Tag is above the maximum 16.00 (+83 % vs typical 12.00)",
+              "source": "tool",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C08_wrong_line_total",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_LINE_TOTAL"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "ARITH_LINE_TOTAL"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "ARITH_LINE_TOTAL",
+              "severity": "critical",
+              "message": "Pos. 2: 18 x 9.50 = 171.00, but 711.00 is printed",
+              "source": "rule",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C09_wrong_vat",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_VAT"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "ARITH_VAT"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "ARITH_VAT",
+              "severity": "critical",
+              "message": "19 % of 1122.00 = 213.18, but VAT is 313.18",
+              "source": "rule",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C10_duplicate_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DUPLICATE_INVOICE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "DUPLICATE_INVOICE"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "DUPLICATE_INVOICE",
+              "severity": "critical",
+              "message": "Invoice RE-2026-0398 from Rheinland Haustechnik GmbH was already paid",
+              "source": "tool",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            28,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C11_implausible_facade",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C12_implausible_quantity",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 0.0,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C13_prompt_injection",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PROMPT_INJECTION_SUSPECTED",
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "PRICE_ABOVE_MAX",
+            "PROMPT_INJECTION_SUSPECTED"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "PROMPT_INJECTION_SUSPECTED",
+              "severity": "critical",
+              "message": "Text addressed to an automated checker: 'Ignoriere alle vorherigen Anweisungen'",
+              "source": "rule",
+              "position": null
+            },
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 110.00 €/Std is above the maximum 85.00 (+62 % vs typical 68.00)",
+              "source": "tool",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C14_exceeds_quote",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "EXCEEDS_QUOTE",
+          "QTY_ABOVE_QUOTE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "EXCEEDS_QUOTE",
+            "QTY_ABOVE_QUOTE"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "EXCEEDS_QUOTE",
+              "severity": "warning",
+              "message": "Invoice 2134.86 is 35 % above quote 1583.89",
+              "source": "rule",
+              "position": null
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 1: 30 m² billed, 22 quoted",
+              "source": "rule",
+              "position": "1"
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 2: 30 m² billed, 22 quoted",
+              "source": "rule",
+              "position": "2"
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 3: 24 m billed, 19 quoted",
+              "source": "rule",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C15_date_before_damage",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DATE_BEFORE_DAMAGE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "DATE_BEFORE_DAMAGE"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "DATE_BEFORE_DAMAGE",
+              "severity": "critical",
+              "message": "Document dated 2026-07-02, damage happened on 2026-07-09",
+              "source": "rule",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C16_unknown_item",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "UNKNOWN_ITEM"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "UNKNOWN_ITEM"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "UNKNOWN_ITEM",
+              "severity": "warning",
+              "message": "Pos. 3 'Sonderleistung Notdienst Wochenende' has no catalogue price; an expert must assess it",
+              "source": "tool",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Baseline: no judgment."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C17_quote_not_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "WRONG_DOC_TYPE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "WRONG_DOC_TYPE"
+          ],
+          "latency_s": 0.0,
+          "findings": [
+            {
+              "code": "WRONG_DOC_TYPE",
+              "severity": "critical",
+              "message": "Document was classified as 'quote', not an invoice",
+              "source": "llm",
+              "position": null
+            }
+          ],
+          "judgments": []
+        }
+      ]
+    }
+  ]
+}

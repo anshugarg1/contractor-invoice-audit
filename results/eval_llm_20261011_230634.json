@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "mode": "llm",
+    "model": "groq:openai/gpt-oss-120b",
+    "cases": 2,
+    "repeats": 1,
+    "prompt_version": "2026-09-13.1",
+    "graph_version": "1.0",
+    "run_at": "2026-10-11T23:06:34"
+  },
+  "summary": {
+    "Correct route": "2/2 (100%)",
+    "False approvals (bad invoice auto-approved)": "n/a",
+    "Dark-processing rate (clean invoice auto-approved)": "2/2 (100%)",
+    "Expected findings detected": "n/a",
+    "Extraction: fields exactly right": "56/56 (100%)",
+    "Extraction: documents fully right": "2/2 (100%)",
+    "Same route in all 1 runs": "n/a (1 run)",
+    "Same findings in all 1 runs": "n/a (1 run)",
+    "Errors": "0",
+    "Latency per case (mean / max)": "4.2 s / 4.5 s"
+  },
+  "cases": [
+    {
+      "case_id": "C01_clean_plumbing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 4.55,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are reasonable for a service to the kitchen at Musterweg 5 where the water leak was reported."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Leak detection with a measuring device is needed to locate the undichte Warmwasser‑Kupferleitung behind the kitchen wall."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Opening and closing 2 m² of wall is sufficient to access the pipe area described in the claim (≈18 m² wall affected)."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Replacing 3 m of 15 mm copper pipe matches the repair of the leaking pipe behind the kitchen wall."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Four 15 mm press fittings are consistent with joining the new copper pipe sections in the kitchen."
+            },
+            {
+              "position": "6",
+              "verdict": "plausible",
+              "reason": "Three hours of installer labor aligns with the time needed for detection, pipe replacement, and wall repair in the described kitchen area."
+            }
+          ],
+          "extraction": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C02_clean_drying",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 3.84,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Setting up and dismantling drying devices is needed to dry the 18 m² wall and 22 m² laminate floor described in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Renting three condenser dryers for 14 days matches the expected drying period for the water‑affected kitchen area."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Electrical energy consumption corresponds to operating the drying equipment required for the described damage."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Three moisture measurements are appropriate to monitor the drying progress of the affected wall and floor."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    }
+  ]
+}

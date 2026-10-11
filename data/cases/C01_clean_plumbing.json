@@ -1,0 +1,90 @@
+{
+  "case_id": "C01_clean_plumbing",
+  "category": "clean",
+  "what_it_tests": "Correct plumbing invoice for the pipe leak",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Rheinland Haustechnik GmbH\nHauptstraße 12, 40764 Langenfeld\nUSt-IdNr. DE811234567\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: RE-2026-0412\nRechnungsdatum: 26.06.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | GEN-001 | Anfahrt / Fahrtkosten | 1 | pauschal | 45,00 € | 45,00 €\n2 | SAN-001 | Leckageortung mit Messgerät | 2 | Std | 95,00 € | 190,00 €\n3 | SAN-006 | Wand öffnen und verschließen | 2 | m² | 55,00 € | 110,00 €\n4 | SAN-004 | Kupferrohr 15 mm erneuern | 3 | m | 38,00 € | 114,00 €\n5 | SAN-005 | Pressfitting 15 mm | 4 | Stk | 14,00 € | 56,00 €\n6 | SAN-003 | Arbeitsstunde Installateur | 3 | Std | 68,00 € | 204,00 €\n\nNettobetrag: 719,00 €\nzzgl. 19 % MwSt.: 136,61 €\nRechnungsbetrag (brutto): 855,61 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE12 3004 0000 0123 4567 89",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Sanitär",
+    "document": {
+      "number": "RE-2026-0412",
+      "date": "2026-06-26",
+      "contractor": "Rheinland Haustechnik GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "GEN-001",
+          "description": "Anfahrt / Fahrtkosten",
+          "quantity": "1",
+          "unit": "pauschal",
+          "unit_price": "45.00",
+          "line_total": "45.00"
+        },
+        {
+          "position": "2",
+          "code": "SAN-001",
+          "description": "Leckageortung mit Messgerät",
+          "quantity": "2",
+          "unit": "Std",
+          "unit_price": "95.00",
+          "line_total": "190.00"
+        },
+        {
+          "position": "3",
+          "code": "SAN-006",
+          "description": "Wand öffnen und verschließen",
+          "quantity": "2",
+          "unit": "m²",
+          "unit_price": "55.00",
+          "line_total": "110.00"
+        },
+        {
+          "position": "4",
+          "code": "SAN-004",
+          "description": "Kupferrohr 15 mm erneuern",
+          "quantity": "3",
+          "unit": "m",
+          "unit_price": "38.00",
+          "line_total": "114.00"
+        },
+        {
+          "position": "5",
+          "code": "SAN-005",
+          "description": "Pressfitting 15 mm",
+          "quantity": "4",
+          "unit": "Stk",
+          "unit_price": "14.00",
+          "line_total": "56.00"
+        },
+        {
+          "position": "6",
+          "code": "SAN-003",
+          "description": "Arbeitsstunde Installateur",
+          "quantity": "3",
+          "unit": "Std",
+          "unit_price": "68.00",
+          "line_total": "204.00"
+        }
+      ],
+      "net_total": "719.00",
+      "vat_rate": "19",
+      "vat_amount": "136.61",
+      "gross_total": "855.61"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "auto_approve",
+    "codes": []
+  }
+}

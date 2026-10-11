@@ -1,0 +1,65 @@
+{
+  "case_id": "C16_unknown_item",
+  "category": "price",
+  "what_it_tests": "A lump-sum position with no catalogue code",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Rheinland Haustechnik GmbH\nHauptstraße 12, 40764 Langenfeld\nUSt-IdNr. DE811234567\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: RE-2026-0470\nRechnungsdatum: 06.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | GEN-001 | Anfahrt / Fahrtkosten | 1 | pauschal | 45,00 € | 45,00 €\n2 | SAN-003 | Arbeitsstunde Installateur | 2 | Std | 68,00 € | 136,00 €\n3 | - | Sonderleistung Notdienst Wochenende | 1 | pauschal | 450,00 € | 450,00 €\n\nNettobetrag: 631,00 €\nzzgl. 19 % MwSt.: 119,89 €\nRechnungsbetrag (brutto): 750,89 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE12 3004 0000 0123 4567 89",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Sanitär",
+    "document": {
+      "number": "RE-2026-0470",
+      "date": "2026-07-06",
+      "contractor": "Rheinland Haustechnik GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "GEN-001",
+          "description": "Anfahrt / Fahrtkosten",
+          "quantity": "1",
+          "unit": "pauschal",
+          "unit_price": "45.00",
+          "line_total": "45.00"
+        },
+        {
+          "position": "2",
+          "code": "SAN-003",
+          "description": "Arbeitsstunde Installateur",
+          "quantity": "2",
+          "unit": "Std",
+          "unit_price": "68.00",
+          "line_total": "136.00"
+        },
+        {
+          "position": "3",
+          "code": null,
+          "description": "Sonderleistung Notdienst Wochenende",
+          "quantity": "1",
+          "unit": "pauschal",
+          "unit_price": "450.00",
+          "line_total": "450.00"
+        }
+      ],
+      "net_total": "631.00",
+      "vat_rate": "19",
+      "vat_amount": "119.89",
+      "gross_total": "750.89"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "UNKNOWN_ITEM"
+    ]
+  }
+}

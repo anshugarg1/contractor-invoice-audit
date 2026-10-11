@@ -1,0 +1,65 @@
+{
+  "case_id": "C07_overpriced_drying",
+  "category": "price",
+  "what_it_tests": "Dryer rental per day above the catalogue maximum",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "TrockenTec Service GmbH\nIndustriestraße 4, 40789 Monheim am Rhein\nUSt-IdNr. DE822345678\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: TT-26-0901\nRechnungsdatum: 15.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | TRO-001 | Trocknungsgerät aufstellen und abbauen | 2 | Stk | 60,00 € | 120,00 €\n2 | TRO-002 | Kondenstrockner Miete | 28 | Tag | 22,00 € | 616,00 €\n3 | TRO-003 | Stromkosten Trocknung | 250 | kWh | 0,40 € | 100,00 €\n\nNettobetrag: 836,00 €\nzzgl. 19 % MwSt.: 158,84 €\nRechnungsbetrag (brutto): 994,84 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE45 3005 0110 0098 7654 32",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Trocknung",
+    "document": {
+      "number": "TT-26-0901",
+      "date": "2026-07-15",
+      "contractor": "TrockenTec Service GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "TRO-001",
+          "description": "Trocknungsgerät aufstellen und abbauen",
+          "quantity": "2",
+          "unit": "Stk",
+          "unit_price": "60.00",
+          "line_total": "120.00"
+        },
+        {
+          "position": "2",
+          "code": "TRO-002",
+          "description": "Kondenstrockner Miete",
+          "quantity": "28",
+          "unit": "Tag",
+          "unit_price": "22.00",
+          "line_total": "616.00"
+        },
+        {
+          "position": "3",
+          "code": "TRO-003",
+          "description": "Stromkosten Trocknung",
+          "quantity": "250",
+          "unit": "kWh",
+          "unit_price": "0.40",
+          "line_total": "100.00"
+        }
+      ],
+      "net_total": "836.00",
+      "vat_rate": "19",
+      "vat_amount": "158.84",
+      "gross_total": "994.84"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "PRICE_ABOVE_MAX"
+    ]
+  }
+}

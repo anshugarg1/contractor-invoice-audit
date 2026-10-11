@@ -1,0 +1,65 @@
+{
+  "case_id": "C17_quote_not_invoice",
+  "category": "doc_type",
+  "what_it_tests": "A quote submitted where an invoice is expected",
+  "claim": {
+    "claim_number": "PX-2026-104871",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Sturmschaden",
+    "damage_date": "2026-07-09",
+    "location": "Lindenstraße 17, 40789 Monheim am Rhein",
+    "description": "Sturmtief hat auf der Südseite des Satteldachs ca. 20 Dachziegel gelöst; die Dachrinne ist auf ca. 6 m Länge verbogen. Kein Wassereintritt ins Gebäude."
+  },
+  "document_text": "Dachdeckerei Hoffmann\nRheinuferweg 21, 40789 Monheim am Rhein\nUSt-IdNr. DE855678901\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104871\nLeistungsort: Lindenstraße 17, 40789 Monheim am Rhein\n\nKOSTENVORANSCHLAG (Angebot)\nAngebotsnummer: KV-2026-031\nAngebotsdatum: 11.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | DAC-003 | Gerüst stellen | 40 | m² | 12,00 € | 480,00 €\n2 | DAC-001 | Dachziegel ersetzen | 20 | Stk | 18,00 € | 360,00 €\n3 | DAC-004 | Dachrinne erneuern | 6 | m | 48,00 € | 288,00 €\n\nNettobetrag: 1.128,00 €\nzzgl. 19 % MwSt.: 214,32 €\nAngebotssumme (brutto): 1.342,32 €\n\nDieses Angebot ist 30 Tage gültig.",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "quote",
+    "trade": "Dachdecker",
+    "document": {
+      "number": "KV-2026-031",
+      "date": "2026-07-11",
+      "contractor": "Dachdeckerei Hoffmann",
+      "claim_number": "PX-2026-104871",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "DAC-003",
+          "description": "Gerüst stellen",
+          "quantity": "40",
+          "unit": "m²",
+          "unit_price": "12.00",
+          "line_total": "480.00"
+        },
+        {
+          "position": "2",
+          "code": "DAC-001",
+          "description": "Dachziegel ersetzen",
+          "quantity": "20",
+          "unit": "Stk",
+          "unit_price": "18.00",
+          "line_total": "360.00"
+        },
+        {
+          "position": "3",
+          "code": "DAC-004",
+          "description": "Dachrinne erneuern",
+          "quantity": "6",
+          "unit": "m",
+          "unit_price": "48.00",
+          "line_total": "288.00"
+        }
+      ],
+      "net_total": "1128.00",
+      "vat_rate": "19",
+      "vat_amount": "214.32",
+      "gross_total": "1342.32"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "WRONG_DOC_TYPE"
+    ]
+  }
+}

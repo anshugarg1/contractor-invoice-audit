@@ -1,0 +1,104 @@
+{
+  "case_id": "C14_exceeds_quote",
+  "category": "quote",
+  "what_it_tests": "Invoice bills 30 m² of flooring where 22 m² were quoted",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Bodenwelt Krause GmbH\nAm Markt 8, 42697 Solingen\nUSt-IdNr. DE844567890\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: BK-4519\nRechnungsdatum: 12.08.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | BOD-001 | Laminat entfernen und entsorgen | 30 | m² | 9,00 € | 270,00 €\n2 | BOD-002 | Laminat verlegen inkl. Material | 30 | m² | 42,00 € | 1.260,00 €\n3 | BOD-003 | Sockelleiste montieren | 24 | m | 11,00 € | 264,00 €\n\nNettobetrag: 1.794,00 €\nzzgl. 19 % MwSt.: 340,86 €\nRechnungsbetrag (brutto): 2.134,86 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE31 3425 0000 0001 2345 67",
+  "quote_text": "Bodenwelt Krause GmbH\nAm Markt 8, 42697 Solingen\nUSt-IdNr. DE844567890\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nKOSTENVORANSCHLAG (Angebot)\nAngebotsnummer: AN-4460\nAngebotsdatum: 12.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | BOD-001 | Laminat entfernen und entsorgen | 22 | m² | 9,00 € | 198,00 €\n2 | BOD-002 | Laminat verlegen inkl. Material | 22 | m² | 42,00 € | 924,00 €\n3 | BOD-003 | Sockelleiste montieren | 19 | m | 11,00 € | 209,00 €\n\nNettobetrag: 1.331,00 €\nzzgl. 19 % MwSt.: 252,89 €\nAngebotssumme (brutto): 1.583,89 €\n\nDieses Angebot ist 30 Tage gültig.",
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Bodenleger",
+    "document": {
+      "number": "BK-4519",
+      "date": "2026-08-12",
+      "contractor": "Bodenwelt Krause GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "BOD-001",
+          "description": "Laminat entfernen und entsorgen",
+          "quantity": "30",
+          "unit": "m²",
+          "unit_price": "9.00",
+          "line_total": "270.00"
+        },
+        {
+          "position": "2",
+          "code": "BOD-002",
+          "description": "Laminat verlegen inkl. Material",
+          "quantity": "30",
+          "unit": "m²",
+          "unit_price": "42.00",
+          "line_total": "1260.00"
+        },
+        {
+          "position": "3",
+          "code": "BOD-003",
+          "description": "Sockelleiste montieren",
+          "quantity": "24",
+          "unit": "m",
+          "unit_price": "11.00",
+          "line_total": "264.00"
+        }
+      ],
+      "net_total": "1794.00",
+      "vat_rate": "19",
+      "vat_amount": "340.86",
+      "gross_total": "2134.86"
+    },
+    "quote": {
+      "number": "AN-4460",
+      "date": "2026-07-12",
+      "contractor": "Bodenwelt Krause GmbH",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "BOD-001",
+          "description": "Laminat entfernen und entsorgen",
+          "quantity": "22",
+          "unit": "m²",
+          "unit_price": "9.00",
+          "line_total": "198.00"
+        },
+        {
+          "position": "2",
+          "code": "BOD-002",
+          "description": "Laminat verlegen inkl. Material",
+          "quantity": "22",
+          "unit": "m²",
+          "unit_price": "42.00",
+          "line_total": "924.00"
+        },
+        {
+          "position": "3",
+          "code": "BOD-003",
+          "description": "Sockelleiste montieren",
+          "quantity": "19",
+          "unit": "m",
+          "unit_price": "11.00",
+          "line_total": "209.00"
+        }
+      ],
+      "net_total": "1331.00",
+      "vat_rate": "19",
+      "vat_amount": "252.89",
+      "gross_total": "1583.89"
+    }
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "EXCEEDS_QUOTE",
+      "QTY_ABOVE_QUOTE"
+    ]
+  }
+}

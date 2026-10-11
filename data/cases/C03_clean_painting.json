@@ -1,0 +1,72 @@
+{
+  "case_id": "C03_clean_painting",
+  "category": "clean",
+  "what_it_tests": "Correct painting invoice for 18 m² of kitchen wall",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Malerbetrieb Schneider\nKirchplatz 3, 40721 Hilden\nUSt-IdNr. DE833456789\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: MS-2026-233\nRechnungsdatum: 20.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | GEN-001 | Anfahrt / Fahrtkosten | 1 | pauschal | 45,00 € | 45,00 €\n2 | MAL-004 | Tapete entfernen | 18 | m² | 6,00 € | 108,00 €\n3 | MAL-005 | Raufaser tapezieren | 18 | m² | 12,00 € | 216,00 €\n4 | MAL-002 | Wand streichen, Dispersion, 2x | 18 | m² | 9,50 € | 171,00 €\n\nNettobetrag: 540,00 €\nzzgl. 19 % MwSt.: 102,60 €\nRechnungsbetrag (brutto): 642,60 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE78 3006 0601 0012 3456 78",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Maler",
+    "document": {
+      "number": "MS-2026-233",
+      "date": "2026-07-20",
+      "contractor": "Malerbetrieb Schneider",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "GEN-001",
+          "description": "Anfahrt / Fahrtkosten",
+          "quantity": "1",
+          "unit": "pauschal",
+          "unit_price": "45.00",
+          "line_total": "45.00"
+        },
+        {
+          "position": "2",
+          "code": "MAL-004",
+          "description": "Tapete entfernen",
+          "quantity": "18",
+          "unit": "m²",
+          "unit_price": "6.00",
+          "line_total": "108.00"
+        },
+        {
+          "position": "3",
+          "code": "MAL-005",
+          "description": "Raufaser tapezieren",
+          "quantity": "18",
+          "unit": "m²",
+          "unit_price": "12.00",
+          "line_total": "216.00"
+        },
+        {
+          "position": "4",
+          "code": "MAL-002",
+          "description": "Wand streichen, Dispersion, 2x",
+          "quantity": "18",
+          "unit": "m²",
+          "unit_price": "9.50",
+          "line_total": "171.00"
+        }
+      ],
+      "net_total": "540.00",
+      "vat_rate": "19",
+      "vat_amount": "102.60",
+      "gross_total": "642.60"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "auto_approve",
+    "codes": []
+  }
+}

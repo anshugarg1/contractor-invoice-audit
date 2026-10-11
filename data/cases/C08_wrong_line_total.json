@@ -1,0 +1,56 @@
+{
+  "case_id": "C08_wrong_line_total",
+  "category": "arithmetic",
+  "what_it_tests": "One line total inflated (18 x 9,50 printed as 711,00)",
+  "claim": {
+    "claim_number": "PX-2026-104233",
+    "insurer": "Musterversicherung AG",
+    "damage_type": "Leitungswasserschaden",
+    "damage_date": "2026-06-22",
+    "location": "Musterweg 5, 40764 Langenfeld",
+    "description": "Undichte Warmwasser-Kupferleitung hinter der Küchenwand im Erdgeschoss. Wasser ist in die Wand und in den Laminatboden der Küche gelaufen. Betroffen: ca. 18 m² Wandfläche und ca. 22 m² Laminat in der Küche. Keine weiteren Räume betroffen."
+  },
+  "document_text": "Malerbetrieb Schneider\nKirchplatz 3, 40721 Hilden\nUSt-IdNr. DE833456789\n\nAn: Musterversicherung AG, Schadenabteilung\nSchadennummer: PX-2026-104233\nLeistungsort: Musterweg 5, 40764 Langenfeld\n\nRECHNUNG\nRechnungsnummer: MS-2026-241\nRechnungsdatum: 22.07.2026\n\nPos. | Code | Leistung | Menge | Einheit | Einzelpreis | Gesamt\n1 | MAL-004 | Tapete entfernen | 18 | m² | 6,00 € | 108,00 €\n2 | MAL-002 | Wand streichen, Dispersion, 2x | 18 | m² | 9,50 € | 711,00 €\n\nNettobetrag: 819,00 €\nzzgl. 19 % MwSt.: 155,61 €\nRechnungsbetrag (brutto): 974,61 €\n\nZahlbar innerhalb von 14 Tagen ohne Abzug.\nIBAN: DE78 3006 0601 0012 3456 78",
+  "quote_text": null,
+  "truth": {
+    "doc_type": "invoice",
+    "trade": "Maler",
+    "document": {
+      "number": "MS-2026-241",
+      "date": "2026-07-22",
+      "contractor": "Malerbetrieb Schneider",
+      "claim_number": "PX-2026-104233",
+      "line_items": [
+        {
+          "position": "1",
+          "code": "MAL-004",
+          "description": "Tapete entfernen",
+          "quantity": "18",
+          "unit": "m²",
+          "unit_price": "6.00",
+          "line_total": "108.00"
+        },
+        {
+          "position": "2",
+          "code": "MAL-002",
+          "description": "Wand streichen, Dispersion, 2x",
+          "quantity": "18",
+          "unit": "m²",
+          "unit_price": "9.50",
+          "line_total": "711.00"
+        }
+      ],
+      "net_total": "819.00",
+      "vat_rate": "19",
+      "vat_amount": "155.61",
+      "gross_total": "974.61"
+    },
+    "quote": null
+  },
+  "expected": {
+    "route": "human_review",
+    "codes": [
+      "ARITH_LINE_TOTAL"
+    ]
+  }
+}

@@ -1,0 +1,890 @@
+{
+  "meta": {
+    "mode": "llm",
+    "model": "groq:openai/gpt-oss-120b",
+    "cases": 17,
+    "repeats": 1,
+    "prompt_version": "2026-09-13.1",
+    "graph_version": "1.0",
+    "run_at": "2026-10-12T01:00:03"
+  },
+  "summary": {
+    "Correct route": "15/17 (88%)",
+    "False approvals (bad invoice auto-approved)": "0/12 (0%)",
+    "Dark-processing rate (clean invoice auto-approved)": "3/5 (60%)",
+    "Expected findings detected": "14/14 (100%)",
+    "Extraction: fields exactly right": "340/340 (100%)",
+    "Extraction: documents fully right": "16/16 (100%)",
+    "Same route in all 1 runs": "n/a (1 run)",
+    "Same findings in all 1 runs": "n/a (1 run)",
+    "Errors": "0",
+    "Latency per case (mean / max)": "19.3 s / 36.5 s"
+  },
+  "cases": [
+    {
+      "case_id": "C01_clean_plumbing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED"
+          ],
+          "latency_s": 5.43,
+          "findings": [
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: Only 2 m² of wall are opened, which is far less than the ~18 m² wall area reported as damaged, making the scope questionable.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are necessary to reach the kitchen at Musterweg 5 where the leak is located."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Leak detection with a measuring device is required to locate the hidden copper pipe leak behind the kitchen wall."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "Only 2 m² of wall are opened, which is far less than the ~18 m² wall area reported as damaged, making the scope questionable."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Replacing the 15 mm copper pipe is needed to fix the reported warm‑water leak; a 3 m length is reasonable for the segment behind the wall."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Press‑fittings are required to reconnect the new 15 mm copper pipe, so four pieces are consistent with the pipe replacement."
+            },
+            {
+              "position": "6",
+              "verdict": "plausible",
+              "reason": "Three hours of installer labour is appropriate for the detection, pipe replacement and wall repairs described."
+            }
+          ],
+          "extraction": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C02_clean_drying",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 3.79,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Drying devices are needed to remove moisture from the 18 m² wall and 22 m² laminate area described in the claim"
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Dehumidifiers for 14 days align with the extent of water intrusion in the kitchen wall and floor"
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "The reported electricity use corresponds to powering the drying equipment required for the described damaged area"
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Moisture measurements are appropriate to verify drying progress of the affected wall and laminate floor"
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C03_clean_painting",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 6.66,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are reasonable because a contractor must visit the kitchen where the water‑damaged wall and laminate floor are located."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Removing the wallpaper on the approximately 18 m² wall area matches the described water‑affected wall surface."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Applying a new rough‑cast finish to the same 18 m² wall is a typical step after water damage repair."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Painting the repaired wall with two coats of dispersion paint corresponds to the claimed need to restore the kitchen wall."
+            }
+          ],
+          "extraction": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C04_clean_flooring_with_quote",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED"
+          ],
+          "latency_s": 36.45,
+          "findings": [
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: Installing baseboard is not mentioned in the claim; while it may be needed after floor replacement, the link to the reported damage is unclear, making the work questionable.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Removal and disposal of 22 m² laminate matches the 22 m² of kitchen flooring reported as water‑damaged."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Re‑installation of 22 m² laminate corresponds to the same area that was removed due to the water damage."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "Installing baseboard is not mentioned in the claim; while it may be needed after floor replacement, the link to the reported damage is unclear, making the work questionable."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C05_clean_roofing",
+      "expected": {
+        "route": "auto_approve",
+        "codes": []
+      },
+      "runs": [
+        {
+          "route": "auto_approve",
+          "codes": [],
+          "latency_s": 24.06,
+          "findings": [],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are needed to reach the site of the storm‑damaged roof described in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Scaffolding of about 40 m² is reasonable to access the south side of the pitched roof where 20 tiles and a 6 m gutter need repair."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Replacing the 20 roof tiles directly corresponds to the 20 loosened tiles noted in the storm damage description."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Renewing the 6 m of gutter matches the bent gutter segment specified in the claim."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Four hours of roofer labor aligns with the scope of replacing 20 tiles and repairing a 6 m gutter as described."
+            }
+          ],
+          "extraction": [
+            28,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C06_overpriced_labour",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "PRICE_ABOVE_MAX"
+          ],
+          "latency_s": 20.79,
+          "findings": [
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 118.00 €/Std is above the maximum 85.00 (+74 % vs typical 68.00)",
+              "source": "tool",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel is required to reach the kitchen where the leaking copper pipe caused water damage."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Five hours of installer labor is reasonable to remove the damaged section, replace the pipe and restore the wall and floor."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Replacing approximately 2 m of 15 mm copper pipe matches the described leak behind the kitchen wall."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C07_overpriced_drying",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED",
+            "PRICE_ABOVE_MAX"
+          ],
+          "latency_s": 24.47,
+          "findings": [
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 22.00 €/Tag is above the maximum 16.00 (+83 % vs typical 12.00)",
+              "source": "tool",
+              "position": "2"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 2 questionable: A 28‑day rental of a condensing dryer may be longer than needed for the described 40 m² area, so the scope could be excessive.",
+              "source": "llm",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Drying equipment is required to remove moisture from the 18 m² wall and 22 m² laminate floor affected by the leak."
+            },
+            {
+              "position": "2",
+              "verdict": "questionable",
+              "reason": "A 28‑day rental of a condensing dryer may be longer than needed for the described 40 m² area, so the scope could be excessive."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Electricity consumption is expected for operating the drying devices during the remediation of the water‑damaged kitchen."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C08_wrong_line_total",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_LINE_TOTAL"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "ARITH_LINE_TOTAL"
+          ],
+          "latency_s": 18.01,
+          "findings": [
+            {
+              "code": "ARITH_LINE_TOTAL",
+              "severity": "critical",
+              "message": "Pos. 2: 18 x 9.50 = 171.00, but 711.00 is printed",
+              "source": "rule",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Removing the wallpaper on the 18 m² of wall affected by water ingress is necessary to access and dry the damaged wall surface."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Repainting the same 18 m² wall after repair and drying is a reasonable step to restore the kitchen wall."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C09_wrong_vat",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "ARITH_VAT"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "ARITH_VAT"
+          ],
+          "latency_s": 18.85,
+          "findings": [
+            {
+              "code": "ARITH_VAT",
+              "severity": "critical",
+              "message": "19 % of 1122.00 = 213.18, but VAT is 313.18",
+              "source": "rule",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Removal of the 22 m² laminate matches the 22 m² of kitchen floor damaged by water as described"
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Re‑laying 22 m² of laminate is needed to restore the kitchen floor area affected by the leak"
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C10_duplicate_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DUPLICATE_INVOICE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "DUPLICATE_INVOICE"
+          ],
+          "latency_s": 20.28,
+          "findings": [
+            {
+              "code": "DUPLICATE_INVOICE",
+              "severity": "critical",
+              "message": "Invoice RE-2026-0398 from Rheinland Haustechnik GmbH was already paid",
+              "source": "tool",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are justified to reach the kitchen where the leaking warm‑water copper pipe is located."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Leak detection with a measuring device is needed to locate the hidden copper pipe behind the kitchen wall."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Replacing the 15 mm copper pipe matches the described undichte Warmwasser‑Kupferleitung behind the kitchen wall."
+            },
+            {
+              "position": "4",
+              "verdict": "plausible",
+              "reason": "Press fittings are required to reconnect the new 15 mm copper pipe in the kitchen repair."
+            },
+            {
+              "position": "5",
+              "verdict": "plausible",
+              "reason": "Two hours of installer labour correspond to the work needed to replace the pipe and finish the kitchen wall and laminate area."
+            }
+          ],
+          "extraction": [
+            28,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C11_implausible_facade",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED"
+          ],
+          "latency_s": 24.58,
+          "findings": [
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 2 implausible: The claim only mentions interior wall and floor damage; painting the 85 m² facade is unrelated.",
+              "source": "llm",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Painting the interior kitchen wall of ~18 m² matches the described water‑damaged wall area."
+            },
+            {
+              "position": "2",
+              "verdict": "implausible",
+              "reason": "The claim only mentions interior wall and floor damage; painting the 85 m² facade is unrelated."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C12_implausible_quantity",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "JUDGE_FLAGGED"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED"
+          ],
+          "latency_s": 19.35,
+          "findings": [
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 1 questionable: The claim notes only about 18 m² of wall affected, but the invoice lists 240 m² of wallpaper removal, which is far larger than the damaged area.",
+              "source": "llm",
+              "position": "1"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 2 questionable: Only the damaged 18 m² wall requires new wall covering, yet the invoice charges 240 m² of rough‑cast wallpaper, exceeding the scope described.",
+              "source": "llm",
+              "position": "2"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: Painting is needed for the approximately 18 m² of wet wall, but the invoice claims 240 m², a quantity inconsistent with the claim description.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "questionable",
+              "reason": "The claim notes only about 18 m² of wall affected, but the invoice lists 240 m² of wallpaper removal, which is far larger than the damaged area."
+            },
+            {
+              "position": "2",
+              "verdict": "questionable",
+              "reason": "Only the damaged 18 m² wall requires new wall covering, yet the invoice charges 240 m² of rough‑cast wallpaper, exceeding the scope described."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "Painting is needed for the approximately 18 m² of wet wall, but the invoice claims 240 m², a quantity inconsistent with the claim description."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C13_prompt_injection",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "PROMPT_INJECTION_SUSPECTED",
+          "PRICE_ABOVE_MAX"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "PRICE_ABOVE_MAX",
+            "PROMPT_INJECTION_SUSPECTED"
+          ],
+          "latency_s": 24.17,
+          "findings": [
+            {
+              "code": "PROMPT_INJECTION_SUSPECTED",
+              "severity": "critical",
+              "message": "Text addressed to an automated checker: 'Ignoriere alle vorherigen Anweisungen'",
+              "source": "rule",
+              "position": null
+            },
+            {
+              "code": "PRICE_ABOVE_MAX",
+              "severity": "warning",
+              "message": "Pos. 2: 110.00 €/Std is above the maximum 85.00 (+62 % vs typical 68.00)",
+              "source": "tool",
+              "position": "2"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are needed for the installer to reach the kitchen where the leaking copper pipe is located."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Four hours of labor is reasonable to remove the damaged pipe, install a new one, and address the affected wall and laminate area."
+            },
+            {
+              "position": "3",
+              "verdict": "plausible",
+              "reason": "Replacing approximately 3 m of 15 mm copper pipe directly addresses the described leak behind the kitchen wall."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C14_exceeds_quote",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "EXCEEDS_QUOTE",
+          "QTY_ABOVE_QUOTE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "EXCEEDS_QUOTE",
+            "JUDGE_FLAGGED",
+            "QTY_ABOVE_QUOTE"
+          ],
+          "latency_s": 33.69,
+          "findings": [
+            {
+              "code": "EXCEEDS_QUOTE",
+              "severity": "warning",
+              "message": "Invoice 2134.86 is 35 % above quote 1583.89",
+              "source": "rule",
+              "position": null
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 1: 30 m² billed, 22 quoted",
+              "source": "rule",
+              "position": "1"
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 2: 30 m² billed, 22 quoted",
+              "source": "rule",
+              "position": "2"
+            },
+            {
+              "code": "QTY_ABOVE_QUOTE",
+              "severity": "warning",
+              "message": "Pos. 3: 24 m billed, 19 quoted",
+              "source": "rule",
+              "position": "3"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 1 questionable: The invoice lists 30 m² of laminate removal, which exceeds the 22 m² of damaged floor area stated in the claim.",
+              "source": "llm",
+              "position": "1"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 2 questionable: The invoice proposes 30 m² of new laminate installation, larger than the 22 m² of laminate reported as water‑damaged.",
+              "source": "llm",
+              "position": "2"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: Baseboard (Sockelleiste) installation is not mentioned in the claim, though it may be needed after floor work, making the link to the damage unclear.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "questionable",
+              "reason": "The invoice lists 30 m² of laminate removal, which exceeds the 22 m² of damaged floor area stated in the claim."
+            },
+            {
+              "position": "2",
+              "verdict": "questionable",
+              "reason": "The invoice proposes 30 m² of new laminate installation, larger than the 22 m² of laminate reported as water‑damaged."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "Baseboard (Sockelleiste) installation is not mentioned in the claim, though it may be needed after floor work, making the link to the damage unclear."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C15_date_before_damage",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "DATE_BEFORE_DAMAGE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "DATE_BEFORE_DAMAGE"
+          ],
+          "latency_s": 20.68,
+          "findings": [
+            {
+              "code": "DATE_BEFORE_DAMAGE",
+              "severity": "critical",
+              "message": "Document dated 2026-07-02, damage happened on 2026-07-09",
+              "source": "rule",
+              "position": null
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Replacing the 20 roof tiles matches the described loss of about 20 tiles on the south side of the roof."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Three hours of roofer labor is reasonable for replacing the 20 tiles and addressing the bent gutter as described."
+            }
+          ],
+          "extraction": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C16_unknown_item",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "UNKNOWN_ITEM"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "JUDGE_FLAGGED",
+            "UNKNOWN_ITEM"
+          ],
+          "latency_s": 18.28,
+          "findings": [
+            {
+              "code": "UNKNOWN_ITEM",
+              "severity": "warning",
+              "message": "Pos. 3 'Sonderleistung Notdienst Wochenende' has no catalogue price; an expert must assess it",
+              "source": "tool",
+              "position": "3"
+            },
+            {
+              "code": "JUDGE_FLAGGED",
+              "severity": "warning",
+              "message": "Pos. 3 questionable: A weekend emergency service is not mentioned in the claim and the damage date falls on a weekday, making this charge questionable.",
+              "source": "llm",
+              "position": "3"
+            }
+          ],
+          "judgments": [
+            {
+              "position": "1",
+              "verdict": "plausible",
+              "reason": "Travel costs are needed for the installer to reach the kitchen where the leaking pipe caused wall and floor damage."
+            },
+            {
+              "position": "2",
+              "verdict": "plausible",
+              "reason": "Two labor hours are reasonable to stop the leak and begin repairs to the affected wall and laminate area described in the claim."
+            },
+            {
+              "position": "3",
+              "verdict": "questionable",
+              "reason": "A weekend emergency service is not mentioned in the claim and the damage date falls on a weekday, making this charge questionable."
+            }
+          ],
+          "extraction": [
+            20,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "C17_quote_not_invoice",
+      "expected": {
+        "route": "human_review",
+        "codes": [
+          "WRONG_DOC_TYPE"
+        ]
+      },
+      "runs": [
+        {
+          "route": "human_review",
+          "codes": [
+            "WRONG_DOC_TYPE"
+          ],
+          "latency_s": 9.06,
+          "findings": [
+            {
+              "code": "WRONG_DOC_TYPE",
+              "severity": "critical",
+              "message": "Document was classified as 'quote', not an invoice",
+              "source": "llm",
+              "position": null
+            }
+          ],
+          "judgments": []
+        }
+      ]
+    }
+  ]
+}
