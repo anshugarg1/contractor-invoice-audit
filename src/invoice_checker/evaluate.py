@@ -142,6 +142,12 @@ def summarise(rows: list[dict], repeats: int) -> dict:
         "Latency per case (mean / max)": (
             f"{statistics.mean(latencies):.1f} s / {max(latencies):.1f} s" if latencies else "n/a"
         ),
+        "Tokens per case (mean)": f"{statistics.mean(tokens):,.0f}" if tokens else "n/a",
+        "Cost per 1,000 invoices": (
+              f"${statistics.mean(costs) * 1000:.2f}" if costs and None not in costs
+              else "unknown (a model is missing in costs.py)"
+          ),
+        "Models that answered": ", ".join(sorted({m for _, run in runs for m in run["tokens"]})) or "none",
     }
 
 
