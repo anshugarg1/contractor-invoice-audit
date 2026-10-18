@@ -42,17 +42,17 @@ def _chat_model(model_name: str):
 class LangChainLLM:
     """Any chat model LangChain supports, selected with LLM_MODEL='provider:model'."""
 
-    def __init__(self, model: str | None = None, fallback: str | None = None) -> None:
+    def __init__(self, model: str | None = None, fallbacks: list[str] | None = None) -> None:
         self.model_name = (model or os.environ.get("LLM_MODEL", "")).strip()
         if not self.model_name:
             raise RuntimeError(
                 "LLM_MODEL is not set. Copy .env.example to .env and choose a model, "
                 "for example LLM_MODEL=openai:gpt-4.1-mini"
             )
-        self.fallback_name = (fallback or os.environ.get("LLM_FALLBACK_MODEL", "")).strip() or None
-        chats = [_chat_model(self.model_name)]
-        if self.fallback_name:
-            chats.append(_chat_model(self.fallback_name))
+        if fallbacks is None:
+            fallbacks = [m.strip() for m in os.environ.get("LLM_FALLBACK_MODELS", "").split(",") if m.strip()]
+        self.fallback_names = fallbacks
+        chats = [_chat_model(name) for name in [self.model_name, *self.fallback_names]]
           
         # Leave the method to LangChain unless overridden (e.g. LLM_STRUCTURED_METHOD=json_schema).
         method = os.environ.get("LLM_STRUCTURED_METHOD", "").strip() or None

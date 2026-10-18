@@ -25,12 +25,12 @@ class FakeChat:
         return RunnableLambda(respond)
 
 
-def gateway(monkeypatch, primary, backup=None):
-    monkeypatch.delenv("LLM_FALLBACK_MODEL", raising=False)
+def gateway(monkeypatch, primary, *backups):
+    monkeypatch.delenv("LLM_FALLBACK_MODELS", raising=False)
     monkeypatch.delenv("LLM_STRUCTURED_METHOD", raising=False)
-    chats = {"primary:model": primary, "backup:model": backup}
+    chats = {"primary:model": primary} | {f"backup{i}:model": chat for i, chat in enumerate(backups, 1)}
     monkeypatch.setattr(llm, "_chat_model", lambda name: chats[name])
-    return llm.LangChainLLM("primary:model", fallback="backup:model" if backup else None)
+    return llm.LangChainLLM("primary:model", fallbacks=[name for name in chats if name != "primary:model"])
 
 
 def test_primary_answers_and_backup_is_not_called(monkeypatch):
@@ -50,4 +50,15 @@ def test_error_surfaces_when_both_models_fail(monkeypatch):
     with pytest.raises(TimeoutError):
         gateway(monkeypatch, primary, backup).classify("Rechnung")
 
- 
+
+def test_fallbacks_are_tried_in_order_until_one_answers(monkeypatch):
+    primary, second, third = FakeChat(TimeoutError()), FakeChat(ConnectionError()), FakeChat(ANSWER)
+    assert gateway(monkeypatch, primary, second, third).classify("Rechnung") == ANSWER
+    assert (primary.calls, second.calls, third.calls) == (1, 1, 1)
+
+
+def test_fallbacks_are_read_from_env_in_order(monkeypatch):
+    monkeypatch.setattr(llm, "_chat_model", lambda name: FakeChat(ANSWER))
+    monkeypatch.setenv("LLM_FALLBACK_MODELS", "groq:openai/gpt-oss-20b, ,ollama:qwen3")
+    assert llm.LangChainLLM("primary:model").fallback_names == ["groq:openai/gpt-oss-20b", "ollama:qwen3"]
+
