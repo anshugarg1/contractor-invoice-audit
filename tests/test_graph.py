@@ -116,3 +116,17 @@ def test_resume_rejects_invalid_answer(cases, catalogue, paid_register):
     config, _ = run(graph, cases["C06_overpriced_labour"])
     with pytest.raises(ValueError):
         graph.invoke(Command(resume={"decision": "maybe"}), config)
+
+
+class TimingOutExtractor(OracleLLM):
+    def extract(self, text):
+        raise TimeoutError()
+
+
+def test_provider_error_fails_safe(cases, catalogue, paid_register):
+    graph = make_graph(TimingOutExtractor(list(cases.values())), catalogue, paid_register)
+    _, snapshot = run(graph, cases["C01_clean_plumbing"])
+    assert snapshot.values["route"] == "human_review"
+    finding = snapshot.values["findings"][0]
+    assert finding["code"] == "EXTRACTION_FAILED" and finding["message"].startswith("TimeoutError")
+

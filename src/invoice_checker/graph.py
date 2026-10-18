@@ -80,7 +80,7 @@ def build_graph(
     def classify(state: CheckState) -> dict:
         try:
             result = llm.classify(state["document_text"])
-        except ValueError as exc:  # unparseable model output: fail safe, a human decides
+        except Exception as exc:  # unparseable model output: fail safe, a human decides
             return {"doc_type": "unknown", "findings": _failure("CLASSIFICATION_FAILED", "critical", _error(exc), "llm")}
         update: dict[str, Any] = {"doc_type": result.doc_type, "trade": result.trade}
         if result.doc_type != "invoice":
@@ -92,13 +92,13 @@ def build_graph(
     def extract(state: CheckState) -> dict:
         try:
             invoice = to_document(llm.extract(state["document_text"]), "invoice")
-        except ValueError as exc:
+        except Exception as exc:
             return {"invoice": None, "findings": _failure("EXTRACTION_FAILED", "critical", _error(exc), "llm")}
         update: dict[str, Any] = {"invoice": invoice.model_dump(mode="json")}
         if state.get("quote_text"):
             try:
                 update["quote"] = to_document(llm.extract(state["quote_text"]), "quote").model_dump(mode="json")
-            except ValueError as exc:
+            except Exception as exc:
                 update["findings"] = _failure("QUOTE_EXTRACTION_FAILED", "warning", _error(exc), "llm")
         return update
 
@@ -124,7 +124,7 @@ def build_graph(
         claim = Claim.model_validate(state["claim"])
         try:
             result = llm.judge(claim, invoice)
-        except ValueError as exc:
+        except Exception as exc:
             return {"judgments": [], "findings": _failure("JUDGE_FAILED", "warning", _error(exc), "llm")}
         return {
             "judgments": [j.model_dump() for j in result.items],
