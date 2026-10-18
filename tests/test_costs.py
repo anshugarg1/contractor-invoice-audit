@@ -21,3 +21,7 @@ def test_unknown_model_cost_is_unknown_not_zero():
 def test_no_llm_calls_cost_nothing():
     assert cost_usd({}) == 0.0
 
+
+def test_local_model_has_a_small_known_cost():
+    cost = cost_usd({"qwen3:4b": usage(1_000_000, 1_000_000)})
+    assert cost is not None and 0 < cost < 1

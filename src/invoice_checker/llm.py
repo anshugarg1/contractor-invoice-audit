@@ -18,6 +18,7 @@ T = TypeVar("T")
 _RETRY_PROVIDERS = {"openai", "anthropic", "groq", "google_genai"}
 LLM_MAX_RETRIES = 3
 LLM_TIMEOUT_S = 60
+LLM_OLLAMA_TIMEOUT_S = 180  # local models are slower and the first call loads the model onto the GPU
 
 class InvoiceLLM(Protocol):
     model_name: str
@@ -32,9 +33,14 @@ class InvoiceLLM(Protocol):
 def _chat_model(model_name: str):
     from langchain.chat_models import init_chat_model
 
+    provider = model_name.split(":", 1)[0]
     kwargs: dict = {}
-    if model_name.split(":", 1)[0] in _RETRY_PROVIDERS:
+    if provider in _RETRY_PROVIDERS:
         kwargs.update(max_retries=LLM_MAX_RETRIES, timeout=LLM_TIMEOUT_S)
+    elif provider == "ollama":  # ChatOllama has no timeout setting of its own; it goes to its HTTP client
+        timeout = float(os.environ.get("LLM_OLLAMA_TIMEOUT_S", LLM_OLLAMA_TIMEOUT_S))
+        kwargs["client_kwargs"] = {"timeout": timeout}
+        
     if temperature := os.environ.get("LLM_TEMPERATURE", "").strip():
         kwargs["temperature"] = float(temperature)
     return init_chat_model(model_name, **kwargs)

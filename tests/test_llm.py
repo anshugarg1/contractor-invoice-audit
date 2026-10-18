@@ -62,3 +62,9 @@ def test_fallbacks_are_read_from_env_in_order(monkeypatch):
     monkeypatch.setenv("LLM_FALLBACK_MODELS", "groq:openai/gpt-oss-20b, ,ollama:qwen3")
     assert llm.LangChainLLM("primary:model").fallback_names == ["groq:openai/gpt-oss-20b", "ollama:qwen3"]
 
+
+def test_local_ollama_model_gets_a_timeout(monkeypatch):
+    pytest.importorskip("langchain_ollama")
+    monkeypatch.delenv("LLM_OLLAMA_TIMEOUT_S", raising=False)
+    chat = llm._chat_model("ollama:qwen3:4b")
+    assert chat.client_kwargs == {"timeout": llm.LLM_OLLAMA_TIMEOUT_S}
