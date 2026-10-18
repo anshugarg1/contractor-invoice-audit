@@ -19,12 +19,13 @@ from decimal import Decimal
 from uuid import uuid4
 
 from dotenv import load_dotenv
-
+from langchain_core.callbacks import UsageMetadataCallbackHandler
 from .baseline import OracleLLM
 from .cases import CASES_DIR, CATALOGUE_PATH, PAID_REGISTER_PATH, ROOT, initial_state, load_cases
 from .catalogue import load_catalogue, load_paid_register
 from .graph import build_graph
 from .llm import LangChainLLM
+from .costs import cost_usd
 from .tracing import flush, langfuse_callbacks, last_trace_id, link_dataset_run, score_trace, sync_dataset
 
 RESULTS_DIR = ROOT / "results"
@@ -74,9 +75,10 @@ def compare_extraction(truth: dict, got: dict | None) -> tuple[int, int]:
 def run_case(graph, case: dict, repeat: int, session_id: str) -> dict:
     # config = {"configurable": {"thread_id": f"eval-{case['case_id']}-{repeat}-{uuid4().hex[:6]}"}}
     callbacks = langfuse_callbacks()
+    usage = UsageMetadataCallbackHandler()  # adds up tokens per model across every LLM call in this run
     config = {
         "configurable": {"thread_id": f"eval-{case['case_id']}-{repeat}-{uuid4().hex[:6]}"},
-        "callbacks": callbacks,
+        "callbacks": [*callbacks, usage],
         "run_name": f"eval {case['case_id']}",
         "metadata": {"langfuse_session_id": session_id, "langfuse_tags": ["eval", case["case_id"]]},
     }
@@ -99,6 +101,12 @@ def run_case(graph, case: dict, repeat: int, session_id: str) -> dict:
         }
         if case["truth"]["doc_type"] == "invoice":
             run["extraction"] = compare_extraction(case["truth"]["document"], values.get("invoice"))
+    run["tokens"] = {
+          model: {
+              "input": u["input_tokens"], 
+              "output": u["output_tokens"]}
+          for model, u in usage.usage_metadata.items()}
+    run["cost_usd"] = cost_usd(usage.usage_metadata)
     run["trace_id"] = last_trace_id(callbacks)
     score_trace(callbacks, _scores(case, run))
     return run
@@ -119,6 +127,8 @@ def summarise(rows: list[dict], repeats: int) -> dict:
     latencies = [run["latency_s"] for _, run in runs if run["route"] != "error"]
     consistent = sum(len({run["route"] for run in r["runs"]}) == 1 for r in rows)
     same_codes = sum(len({tuple(run["codes"]) for run in r["runs"]}) == 1 for r in rows)
+    costs = [run["cost_usd"] for _, run in runs]
+    tokens = [sum(t["input"] + t["output"] for t in run["tokens"].values()) for _, run in runs]
     return {
         "Correct route": _ratio(sum(run["route"] == c["expected"]["route"] for c, run in runs), len(runs)),
         "False approvals (bad invoice auto-approved)": _ratio(sum(run["route"] == "auto_approve" for _, run in bad), len(bad)),
