@@ -19,6 +19,7 @@ _RETRY_PROVIDERS = {"openai", "anthropic", "groq", "google_genai"}
 LLM_MAX_RETRIES = 3
 LLM_TIMEOUT_S = 60
 LLM_OLLAMA_TIMEOUT_S = 180  # local models are slower and the first call loads the model onto the GPU
+LLM_OLLAMA_NUM_CTX = 8192  # Ollama's default (~4k) silently cuts off the start of longer prompts
 
 class InvoiceLLM(Protocol):
     model_name: str
@@ -40,6 +41,7 @@ def _chat_model(model_name: str):
     elif provider == "ollama":  # ChatOllama has no timeout setting of its own; it goes to its HTTP client
         timeout = float(os.environ.get("LLM_OLLAMA_TIMEOUT_S", LLM_OLLAMA_TIMEOUT_S))
         kwargs["client_kwargs"] = {"timeout": timeout}
+        kwargs["num_ctx"] = int(os.environ.get("LLM_OLLAMA_NUM_CTX", LLM_OLLAMA_NUM_CTX))
         
     if temperature := os.environ.get("LLM_TEMPERATURE", "").strip():
         kwargs["temperature"] = float(temperature)

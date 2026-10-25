@@ -68,3 +68,18 @@ def test_local_ollama_model_gets_a_timeout(monkeypatch):
     monkeypatch.delenv("LLM_OLLAMA_TIMEOUT_S", raising=False)
     chat = llm._chat_model("ollama:qwen3:4b")
     assert chat.client_kwargs == {"timeout": llm.LLM_OLLAMA_TIMEOUT_S}
+
+
+def test_local_ollama_model_gets_a_larger_context_window(monkeypatch):
+    pytest.importorskip("langchain_ollama")
+    monkeypatch.delenv("LLM_OLLAMA_NUM_CTX", raising=False)
+    chat = llm._chat_model("ollama:qwen3:4b")
+    assert chat.num_ctx == llm.LLM_OLLAMA_NUM_CTX
+
+
+def test_ollama_context_window_can_be_set_from_env(monkeypatch):
+    pytest.importorskip("langchain_ollama")
+    monkeypatch.setenv("LLM_OLLAMA_NUM_CTX", "16384")
+    chat = llm._chat_model("ollama:qwen3:4b")
+    assert chat.num_ctx == 16384
+
