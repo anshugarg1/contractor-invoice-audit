@@ -14,13 +14,16 @@ import logging
 import os
 import sqlite3
 from pathlib import Path
+from time import time
 from typing import Any, Literal
 from uuid import uuid4
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Request, Response
+from langchain_core.callbacks import UsageMetadataCallbackHandler
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import Command
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from pydantic import BaseModel
 
 from .baseline import OracleLLM
@@ -28,6 +31,7 @@ from .cases import CASES_DIR, CATALOGUE_PATH, PAID_REGISTER_PATH, ROOT, initial_
 from .catalogue import load_catalogue, load_paid_register
 from .graph import build_graph
 from .llm import LangChainLLM
+from .observability import CHECK_SECONDS, CHECKS, HTTP_REQUESTS, HTTP_SECONDS, record_run, setup_logging
 from .tracing import flush, langfuse_callbacks
 
 
@@ -76,26 +80,51 @@ def create_app(llm=None, checkpointer=None) -> FastAPI:
     failed: dict[str, str] = {}  # thread_id -> error; in memory only, lost on restart
     app = FastAPI(title="Invoice checker")
 
+    @app.middleware("http")
+    async def measure(request: Request, call_next):
+        start = time.perf_counter()
+        response = await call_next(request)
+        # The route template (/invoices/{thread_id}), not the real URL: one time series per endpoint, not per invoice.
+        path = getattr(request.scope.get("route"), "path", "unmatched")
+        HTTP_SECONDS.labels(request.method, path).observe(time.perf_counter() - start)
+        HTTP_REQUESTS.labels(request.method, path, str(response.status_code)).inc()
+        return response
+
+
     def thread(thread_id: str) -> dict:
         return {"configurable": {"thread_id": thread_id}}
 
     def run(graph_input, thread_id: str) -> None:
+        usage = UsageMetadataCallbackHandler()  # adds up tokens per model across every LLM call in this run
         config = thread(thread_id) | {
             "callbacks": langfuse_callbacks(),
             "metadata": {"langfuse_session_id": thread_id, "langfuse_tags": ["api"]},
         }
+        start = time.perf_counter()
         try:
             graph.invoke(graph_input, config)
         except Exception as exc:  # LLM errors already go to review inside the graph; this catches bugs
             log.exception("check %s failed", thread_id)
             failed[thread_id] = f"{type(exc).__name__}: {exc}"
+            CHECKS.labels("failed").inc()
+        else:
+            record_run(thread_id, graph.get_state(thread(thread_id)), usage.usage_metadata, time.perf_counter() - start)
         finally:
             flush()
 
+    @app.get("/health")
+    def health() -> dict:
+        return {"status": "ok", "model": llm.model_name}
+
+    @app.get("/metrics")
+    def metrics() -> Response:
+        return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+    
     @app.post("/invoices", status_code=202)
     def submit(invoice: InvoiceIn, tasks: BackgroundTasks) -> dict:
         thread_id = f"{invoice.case_id}-{uuid4().hex[:8]}"
         tasks.add_task(run, initial_state(invoice.model_dump()), thread_id)
+        log.info("invoice submitted", extra={"fields": {"thread_id": thread_id}})
         return {"id": thread_id, "status": "queued"}
 
     @app.get("/invoices/{thread_id}")
@@ -116,6 +145,7 @@ def create_app(llm=None, checkpointer=None) -> FastAPI:
         if not graph.get_state(thread(thread_id)).interrupts:
             raise HTTPException(409, "this invoice is not waiting for a review")
         tasks.add_task(run, Command(resume=answer.model_dump()), thread_id)
+        log.info("review received", extra={"fields": {"thread_id": thread_id, "decision": answer.decision}})
         return {"id": thread_id, "status": "resuming"}
 
     return app
