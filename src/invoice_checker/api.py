@@ -14,12 +14,12 @@ import logging
 import os
 import sqlite3
 from pathlib import Path
-from time import time
+import time
 from typing import Any, Literal
 from uuid import uuid4
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Request, Response
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Response
 from langchain_core.callbacks import UsageMetadataCallbackHandler
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import Command
@@ -97,9 +97,10 @@ def create_app(llm=None, checkpointer=None) -> FastAPI:
     def run(graph_input, thread_id: str) -> None:
         usage = UsageMetadataCallbackHandler()  # adds up tokens per model across every LLM call in this run
         config = thread(thread_id) | {
-            "callbacks": langfuse_callbacks(),
+            "callbacks": [*langfuse_callbacks(), usage],
             "metadata": {"langfuse_session_id": thread_id, "langfuse_tags": ["api"]},
         }
+        phase = "resume" if isinstance(graph_input, Command) else "check"
         start = time.perf_counter()
         try:
             graph.invoke(graph_input, config)
@@ -110,6 +111,7 @@ def create_app(llm=None, checkpointer=None) -> FastAPI:
         else:
             record_run(thread_id, graph.get_state(thread(thread_id)), usage.usage_metadata, time.perf_counter() - start)
         finally:
+            CHECK_SECONDS.labels(phase).observe(time.perf_counter() - start)
             flush()
 
     @app.get("/health")
